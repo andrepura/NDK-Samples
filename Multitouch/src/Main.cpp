@@ -5,8 +5,8 @@
  * Overview:
  * You are free ...
  *
- * to Share — to copy, distribute and transmit the work
- * to Remix — to adapt the work
+ * to Share ï¿½ to copy, distribute and transmit the work
+ * to Remix ï¿½ to adapt the work
  * to make commercial use of the work
  * But:
  * You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
@@ -53,10 +53,12 @@ int main(int argc, char *argv[]) {
 	int rc;
 	int exit_application = 0;
 
+	//initialize some BB specific stuff
 	initBBSpecific();
-
+	//initialize open GL ES 
 	initOpenGL(screen_cxt);
 
+	//MAIN LOOP
 	while (closeApplication == 0) {
 		handleEvent();
 		render();
