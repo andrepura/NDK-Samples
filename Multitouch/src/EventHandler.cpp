@@ -6,8 +6,8 @@
  * Overview:
  * You are free ...
  *
- * to Share — to copy, distribute and transmit the work
- * to Remix — to adapt the work
+ * to Share ï¿½ to copy, distribute and transmit the work
+ * to Remix ï¿½ to adapt the work
  * to make commercial use of the work
  * But:
  * You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
@@ -106,6 +106,7 @@ void handleScreenEvent(bps_event_t *event) {
 	bool found;
 	found = false;
 
+	//search the touchpoint by id
 	while (p != points.end()) {
 		if (p->id == mtouch_event.contact_id) {
 			found = true;
@@ -116,7 +117,8 @@ void handleScreenEvent(bps_event_t *event) {
 
 	switch (screen_val) {
 	case SCREEN_EVENT_MTOUCH_TOUCH:
-
+		//if the touchpoint was found -> update the position
+		//if not -> generate a new touchpoint pobject
 		if (!found) {
 
 			Touchpoint *tp = new Touchpoint(mtouch_event.x, mtouch_event.y,
@@ -125,7 +127,7 @@ void handleScreenEvent(bps_event_t *event) {
 				tp->setColor(colors[mtouch_event.contact_id][0],colors[mtouch_event.contact_id][1],colors[mtouch_event.contact_id][2]);
 			}
 			points.push_back(*tp);
-			fprintf(stderr,"neuer touchpoint: %i Orientation: %i \n",mtouch_event.contact_id,tp->startRotation);
+			fprintf(stderr,"new touchpoint: %i orientation: %i \n",mtouch_event.contact_id,tp->startRotation);
 		} else {
 			p->updatePosition(mtouch_event.x, mtouch_event.y);
 		}
@@ -140,6 +142,7 @@ void handleScreenEvent(bps_event_t *event) {
 		}
 		break;
 	case SCREEN_EVENT_MTOUCH_RELEASE:
+		//hide the touchpoint
 		if (found) {
 			p->setInvisible();
 		} else {
@@ -150,11 +153,6 @@ void handleScreenEvent(bps_event_t *event) {
 }
 
 void handleNavigatorEvent(bps_event_t *event) {
-
-	 /*
-	            } else if(domain == orientation_get_domain()){
-
-					*/
 
     int rc;
     bps_event_t *activation_event = NULL;
@@ -281,7 +279,7 @@ void show_alert()
     dialog_set_size(alert_dialog,DIALOG_SIZE_FULL);
 
 	if (dialog_set_alert_message_text(alert_dialog,
-			"Download our brand new application Compass: \n\nThis is the first magnetic compass written natively for the BlackBerry® PlayBook. It does not use GPS (no movement necessary to get a correct direction), instead the Magnetometer is used.Keep the PlayBook out of range of any metallic object, as this can interfere with the compass!\nTry it!\nFeatures:\n\n- Real magnetic compass (no GPS and/or movement needed)\n- Stunning graphics\n- Swipe down for easy to understand calibration") != BPS_SUCCESS) {
+			"Download our brand new application Compass: \n\nThis is the first magnetic compass written natively for the BlackBerryï¿½ PlayBook. It does not use GPS (no movement necessary to get a correct direction), instead the Magnetometer is used.Keep the PlayBook out of range of any metallic object, as this can interfere with the compass!\nTry it!\nFeatures:\n\n- Real magnetic compass (no GPS and/or movement needed)\n- Stunning graphics\n- Swipe down for easy to understand calibration") != BPS_SUCCESS) {
 		fprintf(stderr, "Failed to set alert dialog message text.");
 		dialog_destroy(alert_dialog);
 		alert_dialog = 0;
