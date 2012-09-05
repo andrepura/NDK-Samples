@@ -7,8 +7,8 @@
  * Overview:
  * You are free ...
  *
- * to Share — to copy, distribute and transmit the work
- * to Remix — to adapt the work
+ * to Share ï¿½ to copy, distribute and transmit the work
+ * to Remix ï¿½ to adapt the work
  * to make commercial use of the work
  * But:
  * You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
@@ -55,7 +55,7 @@ GLuint touchpoint;
 int dpi;
 int counter = 0;
 float width, height;
-
+//predefined touchpoint colors
 float colors[4][3] = {{1,0.35,0.35},{0,0.64,0},{0,0.64,0.64},{0.64,0,0}};
 
 font_t* font;
@@ -65,7 +65,7 @@ std::list<Touchpoint>::iterator pp;
 int initOpenGL(screen_context_t screen_cxt) {
 	fprintf(stderr, "init openGL\n");
 
-	//Initialize vertex and color data
+	//Initialize vertex and color data for the background
 	vertices[0] = 0.0f;
 	vertices[1] = 0.0f;
 
@@ -89,7 +89,8 @@ int initOpenGL(screen_context_t screen_cxt) {
 
 	verticesH[6] = 600.0f;
 	verticesH[7] = 1024.0f;
-
+	
+	//vertices for the touchpoints
 	verticesTouchpoint[0] = 0.0f;
 	verticesTouchpoint[1] = 0.0f;
 
@@ -108,18 +109,18 @@ int initOpenGL(screen_context_t screen_cxt) {
 	eglQuerySurface(egl_disp, egl_surf, EGL_WIDTH, &surface_width);
 	eglQuerySurface(egl_disp, egl_surf, EGL_HEIGHT, &surface_height);
 
-    width = (float) surface_width;
-    height = (float) surface_height;
+	//display width & height
+    	width = (float) surface_width;
+    	height = (float) surface_height;
 
-    if (width < height)
-    {
-    	oriention_side_up = 1;
-    }
+    	if (width < height)
+    	{
+    		oriention_side_up = 1;
+    	}
 
 	//On initialize bbutil loads arial as a default font. We are going to load MyriadPro-Bold as it looks a little better and scale it
 	//to fit out bubble nicely.
 	dpi = bbutil_calculate_dpi(screen_cxt);
-
 	font = bbutil_load_font(
 			"/usr/fonts/font_repository/adobe/MyriadPro-Bold.otf", 9, dpi);
 	if (!font) {
@@ -270,7 +271,7 @@ void render() {
 	glPopMatrix();
 
 	pp = points.begin();
-
+	// loop through the touchpoints
 	while (pp != points.end()) {
 
 		if (pp->visible) {
