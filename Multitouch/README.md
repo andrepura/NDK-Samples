@@ -3,6 +3,7 @@ Multitouch Example for BlackBerry PlayBook
 This example shows how to use multiple touchpoints on the BlackBerry PlayBook. You can find and download the compiled application here: http://appworld.blackberry.com/webstore/content/104764/?lang=en
 
 Copyright (c) 2012 mappau OG
+
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at 
  
 http://www.apache.org/licenses/LICENSE-2.0
@@ -11,5 +12,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 See the License for the specific language governing permissions and limitations under the License.
  
  feel free to contact us:
+ 
  blackberry@mappau.com
+ 
  http://www.mappau.com
