@@ -2,23 +2,24 @@
  *
  * The Eventhandler class handles incoming events: how to react on an incoming event
  *
- * License: CC http://creativecommons.org/licenses/by/3.0/
- * Overview:
- * You are free ...
  *
- * to Share � to copy, distribute and transmit the work
- * to Remix � to adapt the work
- * to make commercial use of the work
- * But:
- * You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
+ * Copyright (c) 2012 mappau OG
  *
- * 2012
- * Author: mappau OG
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * feel free to contact us:
  * blackberry@mappau.com
  * http://www.mappau.com
- *
  *
  */
 
@@ -79,9 +80,7 @@ void handleEvent() {
 			} else if(domain == navigator_get_domain()) {
                 handleNavigatorEvent(event);
 
-			} else if (domain == dialog_get_domain()) {
-                handle_dialog_response(event);
-            }
+			}
 		} else {
 			break;
 		}
@@ -99,14 +98,13 @@ void handleScreenEvent(bps_event_t *event) {
 	mtouch_event_t mtouch_event;
 	int rc = screen_get_mtouch_event(screen_event, &mtouch_event, 0);
 	if (rc) {
-		//fprintf(stderr, "Error: failed to get mtouch event\n");
+		fprintf(stderr, "Error: failed to get mtouch event\n");
 	}
 
 	p = points.begin();
 	bool found;
 	found = false;
 
-	//search the touchpoint by id
 	while (p != points.end()) {
 		if (p->id == mtouch_event.contact_id) {
 			found = true;
@@ -117,8 +115,7 @@ void handleScreenEvent(bps_event_t *event) {
 
 	switch (screen_val) {
 	case SCREEN_EVENT_MTOUCH_TOUCH:
-		//if the touchpoint was found -> update the position
-		//if not -> generate a new touchpoint pobject
+
 		if (!found) {
 
 			Touchpoint *tp = new Touchpoint(mtouch_event.x, mtouch_event.y,
@@ -127,7 +124,7 @@ void handleScreenEvent(bps_event_t *event) {
 				tp->setColor(colors[mtouch_event.contact_id][0],colors[mtouch_event.contact_id][1],colors[mtouch_event.contact_id][2]);
 			}
 			points.push_back(*tp);
-			fprintf(stderr,"new touchpoint: %i orientation: %i \n",mtouch_event.contact_id,tp->startRotation);
+			fprintf(stderr,"neuer touchpoint: %i Orientation: %i \n",mtouch_event.contact_id,tp->startRotation);
 		} else {
 			p->updatePosition(mtouch_event.x, mtouch_event.y);
 		}
@@ -142,7 +139,6 @@ void handleScreenEvent(bps_event_t *event) {
 		}
 		break;
 	case SCREEN_EVENT_MTOUCH_RELEASE:
-		//hide the touchpoint
 		if (found) {
 			p->setInvisible();
 		} else {
@@ -167,9 +163,6 @@ void handleNavigatorEvent(bps_event_t *event) {
         break;
     case NAVIGATOR_ORIENTATION_DONE:
     	break;
-    case NAVIGATOR_SWIPE_DOWN:
-		show_alert();
-        break;
     case NAVIGATOR_EXIT:
 		fprintf(stderr, "CLOSE APP \n");
 		closeApplication = 1;
@@ -242,78 +235,4 @@ int resize(bps_event_t *event)
 	navigator_done_orientation(event);
 
 	return EXIT_SUCCESS;
-}
-
-
-void handle_dialog_response(bps_event_t *event)
-{
-    /*
-     * Double check that the event is valid
-     */
-    if (event == NULL) {
-        return;
-    }
-
-    int selectedIndex = dialog_event_get_selected_index(event);
-    fprintf(stderr,"SELECTION: %i\n",selectedIndex);
-    switch (selectedIndex){
-    case 2:
-    	navigator_invoke("appworld://content/92507", 0);
-        	break;
-    case 1:
-    	navigator_invoke("http://www.mappau.com", 0);
-        	break;
-    }
-
-    dialog_destroy(alert_dialog);
-    alert_dialog = 0;
-}
-
-void show_alert()
-{
-
-    if (dialog_create_alert(&alert_dialog) != BPS_SUCCESS) {
-        fprintf(stderr, "Failed to create alert dialog.");
-        return;
-    }
-    dialog_set_size(alert_dialog,DIALOG_SIZE_FULL);
-
-	if (dialog_set_alert_message_text(alert_dialog,
-			"Download our brand new application Compass: \n\nThis is the first magnetic compass written natively for the BlackBerry� PlayBook. It does not use GPS (no movement necessary to get a correct direction), instead the Magnetometer is used.Keep the PlayBook out of range of any metallic object, as this can interfere with the compass!\nTry it!\nFeatures:\n\n- Real magnetic compass (no GPS and/or movement needed)\n- Stunning graphics\n- Swipe down for easy to understand calibration") != BPS_SUCCESS) {
-		fprintf(stderr, "Failed to set alert dialog message text.");
-		dialog_destroy(alert_dialog);
-		alert_dialog = 0;
-		return;
-	}
-
-
-    /*
-     * Use a button label of our own. Don't attach a context to the button.
-     */
-    if (dialog_add_button(alert_dialog, "Cancel", true, 0, true) != BPS_SUCCESS) {
-        fprintf(stderr, "Failed to add button to alert dialog.");
-        dialog_destroy(alert_dialog);
-        alert_dialog = 0;
-        return;
-    }
-    if (dialog_add_button(alert_dialog, "mappau.com", true, 0, true) != BPS_SUCCESS) {
-        fprintf(stderr, "Failed to add button to alert dialog.");
-        dialog_destroy(alert_dialog);
-        alert_dialog = 0;
-        return;
-    }
-
-    if (dialog_add_button(alert_dialog, "Download", true, 0, true) != BPS_SUCCESS) {
-        fprintf(stderr, "Failed to add button to alert dialog.");
-        dialog_destroy(alert_dialog);
-        alert_dialog = 0;
-        return;
-    }
-
-    if (dialog_show(alert_dialog) != BPS_SUCCESS) {
-        fprintf(stderr, "Failed to show alert dialog.");
-        dialog_destroy(alert_dialog);
-        alert_dialog = 0;
-        return;
-    }
 }

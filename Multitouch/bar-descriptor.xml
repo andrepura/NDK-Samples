@@ -56,31 +56,31 @@
     <asset path="assets/splash_90.png">splash_90.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.676888357" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="Device-Debug/MultitouchUwe" entry="true" type="Qnx/Elf">MultitouchUwe</asset>
+       <asset path="Device-Debug/Multitouch" entry="true" type="Qnx/Elf">Multitouch</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.release.1541004162" name="Device-Release">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="Device-Release/MultitouchUwe" entry="true" type="Qnx/Elf">MultitouchUwe</asset>
+       <asset path="Device-Release/Multitouch" entry="true" type="Qnx/Elf">Multitouch</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.profile.1397939372" name="Device-Profile">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="Device-Profile/MultitouchUwe" entry="true" type="Qnx/Elf">MultitouchUwe</asset>
+       <asset path="Device-Profile/Multitouch" entry="true" type="Qnx/Elf">Multitouch</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.profile.coverage.957026092" name="Device-Coverage">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="Device-Coverage/MultitouchUwe" entry="true" type="Qnx/Elf">MultitouchUwe</asset>
+       <asset path="Device-Coverage/Multitouch" entry="true" type="Qnx/Elf">Multitouch</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.debug.362740306" name="Simulator-Debug">
        <platformArchitecture>x86</platformArchitecture>
-       <asset path="Simulator-Debug/MultitouchUwe" entry="true" type="Qnx/Elf">MultitouchUwe</asset>
+       <asset path="Simulator-Debug/Multitouch" entry="true" type="Qnx/Elf">Multitouch</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.profile.1409635203" name="Simulator-Profile">
        <platformArchitecture>x86</platformArchitecture>
-       <asset path="Simulator-Profile/MultitouchUwe" entry="true" type="Qnx/Elf">MultitouchUwe</asset>
+       <asset path="Simulator-Profile/Multitouch" entry="true" type="Qnx/Elf">Multitouch</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.profile.coverage.569958587" name="Simulator-Coverage">
        <platformArchitecture>x86</platformArchitecture>
-       <asset path="Simulator-Coverage/MultitouchUwe" entry="true" type="Qnx/Elf">MultitouchUwe</asset>
+       <asset path="Simulator-Coverage/Multitouch" entry="true" type="Qnx/Elf">Multitouch</asset>
     </configuration>
     
     <!--  The icon for the application, which should be 86x86. -->

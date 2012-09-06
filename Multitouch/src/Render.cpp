@@ -3,24 +3,24 @@
  * The Main Renderer
  * This class includes all the rendering stuff
  *
- * License: CC http://creativecommons.org/licenses/by/3.0/
- * Overview:
- * You are free ...
  *
- * to Share � to copy, distribute and transmit the work
- * to Remix � to adapt the work
- * to make commercial use of the work
- * But:
- * You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
+ * Copyright (c) 2012 mappau OG
  *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * 2012
- * Author: mappau OG
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  * feel free to contact us:
  * blackberry@mappau.com
  * http://www.mappau.com
- *
  *
  */
 
@@ -55,7 +55,7 @@ GLuint touchpoint;
 int dpi;
 int counter = 0;
 float width, height;
-//predefined touchpoint colors
+
 float colors[4][3] = {{1,0.35,0.35},{0,0.64,0},{0,0.64,0.64},{0.64,0,0}};
 
 font_t* font;
@@ -65,7 +65,7 @@ std::list<Touchpoint>::iterator pp;
 int initOpenGL(screen_context_t screen_cxt) {
 	fprintf(stderr, "init openGL\n");
 
-	//Initialize vertex and color data for the background
+	//Initialize vertex and color data
 	vertices[0] = 0.0f;
 	vertices[1] = 0.0f;
 
@@ -89,8 +89,7 @@ int initOpenGL(screen_context_t screen_cxt) {
 
 	verticesH[6] = 600.0f;
 	verticesH[7] = 1024.0f;
-	
-	//vertices for the touchpoints
+
 	verticesTouchpoint[0] = 0.0f;
 	verticesTouchpoint[1] = 0.0f;
 
@@ -109,18 +108,18 @@ int initOpenGL(screen_context_t screen_cxt) {
 	eglQuerySurface(egl_disp, egl_surf, EGL_WIDTH, &surface_width);
 	eglQuerySurface(egl_disp, egl_surf, EGL_HEIGHT, &surface_height);
 
-	//display width & height
-    	width = (float) surface_width;
-    	height = (float) surface_height;
+    width = (float) surface_width;
+    height = (float) surface_height;
 
-    	if (width < height)
-    	{
-    		oriention_side_up = 1;
-    	}
+    if (width < height)
+    {
+    	oriention_side_up = 1;
+    }
 
 	//On initialize bbutil loads arial as a default font. We are going to load MyriadPro-Bold as it looks a little better and scale it
 	//to fit out bubble nicely.
 	dpi = bbutil_calculate_dpi(screen_cxt);
+
 	font = bbutil_load_font(
 			"/usr/fonts/font_repository/adobe/MyriadPro-Bold.otf", 9, dpi);
 	if (!font) {
@@ -271,7 +270,7 @@ void render() {
 	glPopMatrix();
 
 	pp = points.begin();
-	// loop through the touchpoints
+
 	while (pp != points.end()) {
 
 		if (pp->visible) {
