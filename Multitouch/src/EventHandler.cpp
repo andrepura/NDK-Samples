@@ -124,7 +124,7 @@ void handleScreenEvent(bps_event_t *event) {
 				tp->setColor(colors[mtouch_event.contact_id][0],colors[mtouch_event.contact_id][1],colors[mtouch_event.contact_id][2]);
 			}
 			points.push_back(*tp);
-			fprintf(stderr,"neuer touchpoint: %i Orientation: %i \n",mtouch_event.contact_id,tp->startRotation);
+			fprintf(stderr,"new touchpoint: %i Orientation: %i \n",mtouch_event.contact_id,tp->startRotation);
 		} else {
 			p->updatePosition(mtouch_event.x, mtouch_event.y);
 		}
